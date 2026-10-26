@@ -72,6 +72,25 @@ function App() {
       <section className="game-card">
         <h2 className="welcome-heading">
           <img src={welcomeWeb} alt="Welcome" />
+
+          <span className="welcome-spider" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <g className="spider-legs">
+                <path d="M27 27 L16 18 L8 20" />
+                <path d="M25 32 L13 27 L4 32" />
+                <path d="M25 37 L12 39 L6 48" />
+                <path d="M27 41 L19 49 L18 58" />
+
+                <path d="M37 27 L48 18 L56 20" />
+                <path d="M39 32 L51 27 L60 32" />
+                <path d="M39 37 L52 39 L58 48" />
+                <path d="M37 41 L45 49 L46 58" />
+              </g>
+
+              <ellipse cx="32" cy="37" rx="10" ry="13" />
+              <circle cx="32" cy="23" r="7" />
+            </svg>
+          </span>
         </h2>
         <div className="coin-stage" aria-hidden="true">
           <div
