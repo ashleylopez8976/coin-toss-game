@@ -538,6 +538,37 @@ button:disabled {
   padding: 28px 24px;
   border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 24px;
-  background: rgb(0 0 0 / 65%);
+  background: rgb(0 0 0 / 45%);
   box-shadow: 0 16px 50px rgb(0 0 0 / 40%);
+}
+
+/* Keep the disabled Flip Coin button solid purple. */
+.primary-button:disabled {
+  opacity: 1;
+}
+
+.flip-button-wrapper {
+  position: relative;
+}
+
+.flip-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  color: #111;
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease;
+}
+
+.flip-button-wrapper:hover .flip-tooltip {
+  opacity: 1;
+  visibility: visible;
 }

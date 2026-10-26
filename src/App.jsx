@@ -165,14 +165,22 @@ function App() {
               ))}
             </div>
 
-            <button
-              type="button"
-              className="primary-button"
-              disabled={!guess || isFlipping}
-              onClick={handleFlip}
-            >
-              {isFlipping ? "Flipping…" : "Flip Coin"}
-            </button>
+            <div className="flip-button-wrapper">
+              <button
+                type="button"
+                className="primary-button"
+                disabled={!guess || isFlipping}
+                onClick={handleFlip}
+              >
+                {isFlipping ? "Flipping…" : "Flip Coin"}
+              </button>
+
+              {!guess && !isFlipping && (
+                <span className="flip-tooltip" aria-hidden="true">
+                  Pick heads or tails
+                </span>
+              )}
+            </div>
 
             <div className="result" role="status" aria-live="polite">
               {isFlipping ? (
