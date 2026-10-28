@@ -18,6 +18,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [streak, setStreak] = useState(0);
   const [personalBest, setPersonalBest] = useState(0);
+  const [showPickHint, setShowPickHint] = useState(false);
   const pendingResult = useRef(null);
   const flipLocked = useRef(false);
 
@@ -31,7 +32,14 @@ function App() {
   }
 
   function handleFlip() {
-    if (!guess || flipLocked.current) return;
+    if (flipLocked.current) return;
+
+    if (!guess) {
+      setShowPickHint(true);
+      return;
+    }
+
+    setShowPickHint(false);
 
     flipLocked.current = true;
     const side = Math.random() < 0.5 ? "Heads" : "Tails";
@@ -184,7 +192,10 @@ function App() {
                   className={`guess-button ${guess === side ? "selected" : ""}`}
                   aria-pressed={guess === side}
                   disabled={isFlipping}
-                  onClick={() => setGuess(side)}
+                  onClick={() => {
+                    setGuess(side);
+                    setShowPickHint(false);
+                  }}
                 >
                   {side}
                 </button>
@@ -195,14 +206,18 @@ function App() {
               <button
                 type="button"
                 className="primary-button"
-                disabled={!guess || isFlipping}
+                disabled={isFlipping}
+                aria-disabled={!guess || isFlipping}
                 onClick={handleFlip}
               >
                 {isFlipping ? "Flipping…" : "Flip Coin"}
               </button>
 
               {!guess && !isFlipping && (
-                <span className="flip-tooltip" aria-hidden="true">
+                <span
+                  className={`flip-tooltip ${showPickHint ? "is-visible" : ""}`}
+                  role="status"
+                >
                   Pick heads or tails
                 </span>
               )}

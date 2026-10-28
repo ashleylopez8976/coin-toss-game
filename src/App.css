@@ -568,7 +568,16 @@ button:disabled {
   transition: opacity 150ms ease;
 }
 
-.flip-button-wrapper:hover .flip-tooltip {
+/* Show hover hints only when using a mouse. */
+@media (hover: hover) and (pointer: fine) {
+  .flip-button-wrapper:hover .flip-tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Show the hint after a tap without a selection. */
+.flip-tooltip.is-visible {
   opacity: 1;
   visibility: visible;
 }
