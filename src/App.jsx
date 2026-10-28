@@ -16,6 +16,8 @@ function App() {
   const [isFlipping, setIsFlipping] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [result, setResult] = useState(null);
+  const [streak, setStreak] = useState(0);
+  const [personalBest, setPersonalBest] = useState(0);
   const pendingResult = useRef(null);
   const flipLocked = useRef(false);
 
@@ -46,14 +48,27 @@ function App() {
   }
 
   function handleLanding(event) {
-    if (event.target !== event.currentTarget) return;
-    if (!pendingResult.current) return;
+  if (event.target !== event.currentTarget) return;
+  if (!pendingResult.current) return;
 
-    setResult(pendingResult.current);
-    pendingResult.current = null;
-    flipLocked.current = false;
-    setIsFlipping(false);
+  const landingResult = pendingResult.current;
+
+  if (landingResult.won) {
+    const nextStreak = streak + 1;
+    setStreak(nextStreak);
+
+    if (nextStreak > personalBest) {
+      setPersonalBest(nextStreak);
+    }
+  } else {
+    setStreak(0);
   }
+
+  setResult(landingResult);
+  pendingResult.current = null;
+  flipLocked.current = false;
+  setIsFlipping(false);
+}
 
   const namePrefix = playerName ? `${playerName}, ` : "";
 
@@ -144,6 +159,17 @@ function App() {
           </>
         ) : (
           <div className="play-area">
+            <div className="scoreboard">
+          <div>
+            <span>Current Streak</span>
+            <strong>{streak}</strong>
+          </div>
+
+          <div>
+            <span>Personal Best</span>
+            <strong>{personalBest}</strong>
+          </div>
+        </div>
             <p className="welcome">
               {playerName
                 ? `Make your call, ${playerName}!`

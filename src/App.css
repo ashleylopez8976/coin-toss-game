@@ -572,3 +572,26 @@ button:disabled {
   opacity: 1;
   visibility: visible;
 }
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin: 20px 0;
+}
+
+.scoreboard div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scoreboard span {
+  color: #ddd;
+  font-size: 13px;
+}
+
+.scoreboard strong {
+  color: #c4b5fd;
+  font-size: 26px;
+}
